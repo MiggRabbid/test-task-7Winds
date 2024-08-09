@@ -1,0 +1,15 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+body {
+  @apply box-border p-0 m-0
+  min-h-screen min-w-80 max-w-[1920px]
+  bg-black;
+}
+
+#root {
+  @apply w-full h-full
+  
+  flex flex-col justify-between items-center;
+}

@@ -1,0 +1,12 @@
+.container {
+  @apply w-full h-full;
+}
+
+.header {
+  @apply w-full h-11 bg-siteTheme-main
+  text-siteTheme-light;
+}
+
+.body {
+  @apply w-full h-full;
+}
