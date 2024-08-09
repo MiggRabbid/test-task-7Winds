@@ -1,0 +1,17 @@
+%table-cell {
+  @apply ps-3 ms-0 me-auto max-w-[200px] w-[11.96%] 
+  text-start cursor-default;
+}
+
+%table-body-cell {
+  @extend %table-cell;
+  @apply h-[60px] border-b-siteWidth;
+}
+
+%table-cell-first {
+  @apply max-w-[110px] w-[6.58%];
+}
+
+%table-cell-wide {
+  @apply w-auto;
+}

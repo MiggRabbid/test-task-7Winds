@@ -2,14 +2,19 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Roboto:wght@400;500;700&display=swap');
 body {
   @apply box-border p-0 m-0
-  min-h-screen min-w-80 max-w-[1920px]
-  bg-black;
+  bg-siteTheme-dark;
+
+  * {
+    @apply p-0 m-0
+    font-siteFont font-normal not-italic text-sm
+    text-siteTheme-light border-siteTheme-ascent;
+  }
 }
 
 #root {
-  @apply w-full h-full
-  
+  @apply mx-auto min-w-80 max-w-[1920px] min-h-screen
   flex flex-col justify-between items-center;
 }

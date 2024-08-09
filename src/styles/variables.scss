@@ -1,4 +1,3 @@
-$bg-color-main: #414144;
-$bg-color-second: #202124;
-$font-color-main: #FFFFFF;
-$font-color-second: #A1A1AA;
+$height-header: 44px;
+$height-body: calc(100vh - $height-header - 0.5px);
+$border-width: 1px

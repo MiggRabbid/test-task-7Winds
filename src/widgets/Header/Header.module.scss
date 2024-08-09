@@ -1,0 +1,46 @@
+@import '../../styles/variables.scss';
+
+.header {
+  @apply w-full flex flex-row
+  justify-start items-center gap-7
+  bg-siteTheme-main;
+  height: $height-header;
+
+  .header__nav {
+    @apply ms-5;
+
+    .nav__list {
+      @apply flex flex-row gap-[23px];
+
+      .list__btn {
+        @apply size-6;
+
+        .btn__menu {
+          @apply size-[16px];
+        }
+
+        .btn__back {
+          @apply w-[18px] h-[15px];
+        }
+      }
+    }
+  }
+
+  .header_tabs{
+    @apply h-full;
+
+    .tabs__btnGroup {
+      @apply h-full flex flex-row gap-6;
+
+      .btnGroup__item {
+        @apply h-full text-sm text-siteTheme-second;
+      }
+
+      .btnGroup__item_active {
+        @extend .btnGroup__item;
+        @apply relative text-siteTheme-light
+        border-b-2 border-siteTheme-light;
+      }
+    }
+  }
+}

@@ -1,0 +1,57 @@
+@import '../../../styles/variables.scss';
+
+.aside{
+  @apply h-full w-[234px]
+  border-e-siteWidth bg-siteTheme-main;
+  min-height: $height-body;
+
+  .aside__title {
+    @apply border-b-siteWidth;
+
+    .title__container {
+      @apply h-11 ps-5 flex 
+      flex-row justify-center items-center gap-[62px];
+      
+      .title__text {
+        .text__main {
+          @apply text-siteTheme-second text-nowrap
+          leading-4 cursor-default;
+        }
+  
+        .text__second {
+          @extend .text__main;
+          @apply text-[10px] leading-3;
+        }
+      }
+  
+      .title__btn {
+        @apply size-6;
+        img {
+  
+        }
+      }
+
+    }
+  }
+
+  .aside__menu {
+    .menu__button {
+      @apply w-full h-8 flex flex-row 
+      justify-start items-center gap-[14px]
+      transition-all duration-200;
+
+      img {
+        @apply ms-5 size-[22px]
+      }
+    }
+
+    .menu__button:hover {
+      @apply bg-siteTheme-ascent
+    }
+
+    .menu__button_active {
+      @extend .menu__button;
+      @apply bg-siteTheme-second;
+    }
+  }
+}

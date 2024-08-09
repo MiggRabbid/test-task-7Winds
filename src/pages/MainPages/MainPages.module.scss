@@ -1,12 +1,103 @@
-.container {
-  @apply w-full h-full;
-}
+@import '../../styles/variables.scss';
+@import '../../styles/extends.scss';
 
-.header {
-  @apply w-full h-11 bg-siteTheme-main
-  text-siteTheme-light;
+.container {
+  @apply w-full h-full grow
+  flex flex-col;
 }
 
 .body {
-  @apply w-full h-full;
+  @apply w-full h-max 
+  flex flex-row grow border-t-siteWidth;
+  min-height: $height-body;
+
+}
+
+.main {
+  @apply h-full w-full;
+  min-height: $height-body;
+
+  .main__tabs {
+    @apply w-full border-b-siteWidth;
+
+    .tabs__btn {
+      @apply h-11 py-[12px] px-[15px]
+      text-[18px] leading-[20px]
+      border-e-siteWidth;
+    }
+  }
+
+  .table__container {
+    @apply px-[10px]
+  }
+  .main__table {
+    @apply w-full min-h-full h-max;
+
+    .table__thead {
+      @apply h-[42px] border-b-siteWidth;
+
+      .table__th {
+        @extend %table-cell;
+        @apply text-siteTheme-second;
+      }
+
+      .table__th:nth-child(1) {
+        @extend %table-cell-first;
+      }
+
+      .table__th:nth-child(2) {
+        @extend %table-cell-wide;
+      }
+    }
+
+    .table__tbody {
+
+      .tbody__td {
+        @extend %table-body-cell;
+      }
+
+      .tbody__td_first {
+        @extend .tbody__td;
+        @extend %table-cell-first;
+
+        .td__btns {
+          @apply relative ps-[2px] w-[55px] h-7 flex flex-row 
+          justify-start items-center gap-[6px]
+          rounded-md z-50 transition-all duration-200;
+
+          .btn__create {
+            @apply size-6 ;
+          }
+  
+          .btn__delete {
+            @apply size-4 opacity-0 transition-all duration-200;
+          }
+        }
+
+        .td__btns:hover {
+          @apply  bg-siteTheme-ascent;
+
+          .btn__delete {
+            @apply size-4 block opacity-100;
+          }
+        }
+
+        .btns__path_child {
+          @apply content-[''] w-[1px] h-[53px] 
+          absolute left-[15px] top-[22px]
+          border-s-siteWidth z-40
+          border-siteTheme-light;
+        }
+
+        .btns__path_sibling {
+          @extend .btns__path_child;
+          @apply w-[11px] border-b-siteWidth
+        }
+      }
+
+      .tbody__td:nth-child(2) {
+        @extend %table-cell-wide;
+      }
+    }
+  }
 }
