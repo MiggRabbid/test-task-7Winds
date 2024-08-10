@@ -28,7 +28,24 @@ const tableData: iEntity = {
           equipmentCosts: 1200,
           overheads: 850,
           estimatedProfit: 1020000,
-          child: [null],
+          child: [
+            {
+              rowName: 'Под статья работы № 1',
+              salary: 38200,
+              equipmentCosts: 1200,
+              overheads: 850,
+              estimatedProfit: 1020000,
+              child: [null],
+            },
+            {
+              rowName: 'Под статья работы № 2',
+              salary: 38200,
+              equipmentCosts: 1200,
+              overheads: 850,
+              estimatedProfit: 1020000,
+              child: [null],
+            }
+          ],
         },
       ],
     },

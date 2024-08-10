@@ -12,33 +12,38 @@ interface iRowBodyProps {
   item: typeColumnMapKey;
   rowType?: enumRowType;
   lvl: string;
+  onClickEdit: () => void;
+  isParentEdited: boolean;
 }
 
-const BASE_LEFT_POSITION = 20;
+const BASE_LEFT_POSITION = 18;
 
 const FirstCell: React.FC<iRowBodyProps> = (props) => {
-  const { item, rowType, lvl } = props;
+  const { item, rowType, lvl, isParentEdited, onClickEdit } = props;
 
   const nestedLvl = lvl.split('-').length;
-  const leftPosition = `left-[${BASE_LEFT_POSITION * nestedLvl}px]`;
+  const leftPosition = BASE_LEFT_POSITION * nestedLvl;
 
   return (
     <td className={styles.row__td_first} key={`${lvl}-${item}`}>
-      <div className={`${styles.td__btns} ${leftPosition}`}>
+      <div 
+        className={styles.td__btns}
+        style={{ left: `${leftPosition}px` }}
+      >
         {rowType === enumRowType.parent && (
           <div className={styles.btns__path_parent}></div>
         )}
         {rowType === enumRowType.sibling && (
           <div className={styles.btns__path_sibling}></div>
         )}
-        <button>
+        <button onClick={onClickEdit} disabled={isParentEdited}>
           <img
             src={iconFile}
             alt="Создать вложение"
             className={styles.btn__create}
           />
         </button>
-        <button>
+        <button disabled={isParentEdited}>
           <img src={iconTrash} alt="Удалить" className={styles.btn__delete} />
         </button>
       </div>

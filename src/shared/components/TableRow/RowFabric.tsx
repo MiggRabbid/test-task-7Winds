@@ -22,12 +22,11 @@ const RowFabric: React.FC<iRowFabricProps> = (props) => {
   const { rowType, rowData } = props;
 
   if (!rowData) return null;
+  if (rowType === enumRowType.td && !rowData) return null;
 
   if (rowType === enumRowType.th) {
     return <RowHeader columnMap={columnMap} />;
   }
-
-  if (rowType === enumRowType.td && !rowData) return null;
 
   const parentRowType = rowData.child[0] === null ? enumRowType.noChild : enumRowType.parent
   return (

@@ -21,11 +21,6 @@
     }
   }
 
-  .td__btns_nested {
-    @extend .td__btns;
-    @apply ms-[20px];
-  }
-
   .td__btns:hover {
     @apply bg-siteTheme-ascent;
 
@@ -36,7 +31,7 @@
 
   .btns__path_parent {
     @apply content-[''] w-[11px] h-[55px] 
-    absolute left-[15px] top-[22px]
+    absolute left-[14px] top-[22px]
     border-s-siteWidth border-b-siteWidth 
     border-siteTheme-light z-40;
   }
@@ -44,6 +39,6 @@
   .btns__path_sibling {
     @extend .btns__path_parent;
     @apply h-[59px] border-b-siteWidth
-    top-[17px] left-[-5px];
+    top-[17px] left-[-4px];
   }
 }

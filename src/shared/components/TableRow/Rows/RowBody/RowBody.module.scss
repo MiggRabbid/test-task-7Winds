@@ -10,3 +10,16 @@
     @extend %table-cell-wide;
   }
 }
+
+.row_block {
+  @extend .row;
+  @apply bg-green-950;
+
+  .row__td {
+    @extend %table-body-cell;
+  }
+
+  .row__td:nth-child(2) {
+    @extend %table-cell-wide;
+  }
+}
