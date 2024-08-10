@@ -1,0 +1,12 @@
+@import '../../../../../styles/variables.scss';
+@import '../../../../../styles/extends.scss';
+
+.row {
+  .row__td {
+    @extend %table-body-cell;
+  }
+
+  .row__td:nth-child(2) {
+    @extend %table-cell-wide;
+  }
+}

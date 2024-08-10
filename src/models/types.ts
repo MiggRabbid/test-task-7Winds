@@ -9,8 +9,14 @@ export type typeTableKey = [
 
 export type typeTbKey = 'rowName' | 'salary' | 'equipmentCosts' | 'overheads' | 'estimatedProfit' | 'child';
 
-//export  enum enumLvl {
-//   parent = 'parent',
-//   child = 'child',
-//   sibling = 'sibling',
-// }
+
+export enum enumRowType {
+  th = 'th',
+  td = 'td',
+}
+
+export  enum enumRowType {
+  parent = 'parent',
+  noChild = 'noChild',
+  sibling = 'sibling',
+}

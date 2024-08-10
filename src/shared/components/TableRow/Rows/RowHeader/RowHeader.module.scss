@@ -1,0 +1,17 @@
+@import '../../../../../styles/variables.scss';
+@import '../../../../../styles/extends.scss';
+
+.row {
+  .row__th {
+    @extend %table-cell;
+    @apply text-siteTheme-second;
+  }
+
+  .row__th:nth-child(1) {
+    @extend %table-cell-first;
+  }
+
+  .row__th:nth-child(2) {
+    @extend %table-cell-wide;
+  }
+}

@@ -1,5 +1,5 @@
 %table-cell {
-  @apply ps-3 ms-0 me-auto max-w-[200px] w-[11.96%] 
+  @apply ps-3 ms-0 me-auto max-w-[200px] w-[11.96%] min-w-[100px] 
   text-start cursor-default;
 }
 
@@ -9,7 +9,7 @@
 }
 
 %table-cell-first {
-  @apply max-w-[110px] w-[6.58%];
+  @apply max-w-[110px] w-[6.58%] min-w-[90px];
 }
 
 %table-cell-wide {

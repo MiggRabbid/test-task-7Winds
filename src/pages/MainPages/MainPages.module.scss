@@ -49,55 +49,5 @@
         @extend %table-cell-wide;
       }
     }
-
-    .table__tbody {
-
-      .tbody__td {
-        @extend %table-body-cell;
-      }
-
-      .tbody__td_first {
-        @extend .tbody__td;
-        @extend %table-cell-first;
-
-        .td__btns {
-          @apply relative ps-[2px] w-[55px] h-7 flex flex-row 
-          justify-start items-center gap-[6px]
-          rounded-md z-50 transition-all duration-200;
-
-          .btn__create {
-            @apply size-6 ;
-          }
-  
-          .btn__delete {
-            @apply size-4 opacity-0 transition-all duration-200;
-          }
-        }
-
-        .td__btns:hover {
-          @apply  bg-siteTheme-ascent;
-
-          .btn__delete {
-            @apply size-4 block opacity-100;
-          }
-        }
-
-        .btns__path_child {
-          @apply content-[''] w-[1px] h-[53px] 
-          absolute left-[15px] top-[22px]
-          border-s-siteWidth z-40
-          border-siteTheme-light;
-        }
-
-        .btns__path_sibling {
-          @extend .btns__path_child;
-          @apply w-[11px] border-b-siteWidth
-        }
-      }
-
-      .tbody__td:nth-child(2) {
-        @extend %table-cell-wide;
-      }
-    }
   }
 }

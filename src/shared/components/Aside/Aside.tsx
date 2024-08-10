@@ -22,11 +22,16 @@ const Aside: React.FC<{ menuItems: string[] }> = (props) => {
           </button>
         </div>
       </div>
+
       <div className={styles.aside__menu}>
-        {menuItems.map((item) => {
-          const btnClass = item === activeBtn ? styles.menu__button_active : styles.menu__button;
+        {menuItems.map((item, index) => {
+          const btnClass =
+            item === activeBtn
+              ? styles.menu__button_active
+              : styles.menu__button;
+
           return (
-            <button className={btnClass}>
+            <button className={btnClass} key={`aside-item-${index + 1}`}>
               <img src={iconItem} alt={item} />
               <p>{item}</p>
             </button>
