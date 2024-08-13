@@ -104,22 +104,23 @@ const RowBody: React.FC<iRowBodyProps> = (props) => {
 
   return (
     <>
-      <tr className={rowClass} key={lvl}>
+      <tr className={rowClass} key={lvl} id={`row-${lvl}`}>
         {Array.from(columnMap.keys()).map((item: typeColumnMapKey) => {
           if (item === 'child') {
             return (
               <FirstCell
-                item={item}
+              key={`${item}-${tableData.id}`}
                 lvl={lvl}
+                id={`${item}-${tableData.id}`}
+                item={item}
                 rowType={rowType}
-                key={`${item}-${tableData.id}`}
+                isNewRow={isNewRow}
                 rowIsDisabled={rowIsDisabled && !isEdited}
                 onClickAddRow={handleClickAddRow}
                 onClickDelRow={() => {
                   console.log('deleteRow - ', tableData.id, tableData.rowName)
                   deleteRow({ params: { rid: tableData.id } })}
                 }
-                isNewRow={isNewRow}
               />
             );
           }
@@ -127,13 +128,14 @@ const RowBody: React.FC<iRowBodyProps> = (props) => {
           return (
             <OtherCells
               key={`${item}-${tableData.id}`}
-              inputType={item === 'rowName' ? 'text' : 'number'}
+              id={`${item}-${tableData.id}`}
               controlId={item}
+              inputType={item === 'rowName' ? 'text' : 'number'}
               value={formik.values[item]}
               isDisabled={rowIsDisabled && !isEdited}
               isEdited={isEdited}
-              onEditClick={handleClickIsEdited}
               isNewRow={isNewRow}
+              onEditClick={handleClickIsEdited}
               onChange={formik.handleChange}
               onSubmit={formik.handleSubmit}
               onCancel={handleClickCancel}
@@ -165,4 +167,4 @@ const RowBody: React.FC<iRowBodyProps> = (props) => {
   );
 };
 
-export default RowBody;
+export default React.memo(RowBody);

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 import { columnMap, getParentType, isDataEmpty } from './RowFabric.services';
@@ -18,7 +18,11 @@ interface iRowFabricProps {
 const RowFabric: React.FC<iRowFabricProps> = (props) => {
   const { rowType, parentId } = props;
   const rowData: iResponse = useSelector(getTableData);
-  
+
+  useEffect(() => {
+    console.log('rowData is changed')
+  }, [rowData]);
+
   if (rowType === enumRowType.th) {
     return <RowHeader columnMap={columnMap} />;
   }

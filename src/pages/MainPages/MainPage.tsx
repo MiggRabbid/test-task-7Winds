@@ -13,7 +13,7 @@ import Aside from '../../shared/components/Aside/Aside.tsx';
 import RowFabric from '../../shared/components/TableRow/RowFabric.tsx';
 
 import { enumRowType } from '../../models/types.ts';
-
+import { getSortedTableData } from './MainPage.services.ts';
 
 const MainPage = () => {
   const { setTableData } = useActions();
@@ -25,7 +25,11 @@ const MainPage = () => {
   } = useGetAllRowQuery();
 
   useEffect(() => {
-    if (!!tableData) setTableData(tableData);
+    console.log('tableData is changed');
+    if (!!tableData) {
+      const sortedTableData = getSortedTableData(tableData);
+      setTableData(sortedTableData);
+    }
   }, [tableData]);
 
   return (
@@ -49,15 +53,12 @@ const MainPage = () => {
                   <RowFabric rowType={enumRowType.th} parentId={null} />
                 </thead>
                 <tbody className={styles.table__tbody}>
-                  <RowFabric
-                    rowType={enumRowType.td}
-                    parentId={null}
-                  />
+                  <RowFabric rowType={enumRowType.td} parentId={null} />
                 </tbody>
               </table>
             )}
 
-            {((!!isLoading || !!isFetching) && !tableData) && (
+            {(!!isLoading || !!isFetching) && !tableData && (
               <div className={styles.table__isLoading}>
                 <p>ПОЛУЧЕНИЕ ДАННЫХ</p>
                 <DataUsageIcon className={styles.isLoading__ring} />

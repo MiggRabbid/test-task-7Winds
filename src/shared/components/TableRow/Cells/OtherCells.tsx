@@ -1,34 +1,31 @@
-import React, {
-  ChangeEvent,
-  KeyboardEvent,
-  useCallback,
-  useEffect,
-} from 'react';
+import React, { ChangeEvent, KeyboardEvent, useCallback } from 'react';
 
 import styles from './OtherCells.module.scss';
 
 interface iOtherCellsProps {
+  id: string;
+  controlId: string;
   inputType: 'text' | 'number';
   value: string | number;
-  controlId: string;
   isDisabled: boolean;
   isEdited: boolean;
-  onEditClick: () => void;
   isNewRow: boolean;
+  onEditClick: () => void;
   onChange: (e: ChangeEvent<HTMLInputElement>) => void;
   onSubmit: () => void;
   onCancel: () => void;
 }
 
 const OtherCells: React.FC<iOtherCellsProps> = ({
+  id,
+  controlId,
   inputType,
   value,
   isDisabled,
   isEdited,
+  isNewRow,
   onEditClick,
   onChange,
-  isNewRow,
-  controlId,
   onSubmit,
   onCancel,
 }) => {
@@ -46,10 +43,18 @@ const OtherCells: React.FC<iOtherCellsProps> = ({
     [onSubmit, onCancel],
   );
 
+  const handleOnChange = useCallback(
+    (e: ChangeEvent<HTMLInputElement>) => {
+      onChange(e);
+    },
+    [onChange],
+  );
+
   return (
     <td
       className={tdClass}
       onDoubleClick={!isDisabled ? onEditClick : undefined}
+      id={id}
     >
       {inputBlocked ? (
         <p>{value}</p>
@@ -57,7 +62,7 @@ const OtherCells: React.FC<iOtherCellsProps> = ({
         <input
           type={inputType}
           value={value}
-          onChange={onChange}
+          onChange={handleOnChange}
           disabled={isDisabled && !isNewRow}
           className={styles.td__input}
           name={controlId}
@@ -68,11 +73,4 @@ const OtherCells: React.FC<iOtherCellsProps> = ({
   );
 };
 
-export default React.memo(OtherCells, (prevProps, nextProps) => {
-  return (
-    prevProps.value === nextProps.value &&
-    prevProps.isDisabled === nextProps.isDisabled &&
-    prevProps.isEdited === nextProps.isEdited &&
-    prevProps.isNewRow === nextProps.isNewRow
-  );
-});
+export default React.memo(OtherCells);

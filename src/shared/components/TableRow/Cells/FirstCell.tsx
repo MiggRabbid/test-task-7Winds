@@ -9,34 +9,37 @@ import { typeColumnMapKey } from '../../../../models/interface';
 import { enumRowType } from '../../../../models/types';
 
 interface iRowBodyProps {
+  lvl: string;
+  id: string;
   item: typeColumnMapKey;
   rowType?: enumRowType;
-  lvl: string;
+  isNewRow: boolean;
   rowIsDisabled: boolean;
   onClickAddRow: () => void;
   onClickDelRow: () => void;
-  isNewRow: boolean;
 }
 
 const BASE_LEFT_POSITION = 18;
 
 const FirstCell: React.FC<iRowBodyProps> = (props) => {
   const {
+    lvl,
+    id,
     item,
     rowType,
-    lvl,
+    isNewRow,
     rowIsDisabled,
     onClickAddRow,
     onClickDelRow,
-    isNewRow,
   } = props;
+  
 
   const nestedLvl = lvl.split('-').length;
   const leftPosition = BASE_LEFT_POSITION * nestedLvl;
   const btnsClass = !isNewRow ? styles.td__btns : styles.td__btns_isNewRow;
 
   return (
-    <td className={styles.row__td_first} key={`${lvl}-${item}`}>
+    <td className={styles.row__td_first} key={`${lvl}-${item}`} id={id}>
       <div className={btnsClass} style={{ left: `${leftPosition}px` }}>
         {rowType === enumRowType.parent && (
           <div className={styles.btns__path_parent} />
@@ -61,4 +64,4 @@ const FirstCell: React.FC<iRowBodyProps> = (props) => {
   );
 };
 
-export default FirstCell;
+export default React.memo(FirstCell);
