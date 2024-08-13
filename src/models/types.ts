@@ -20,3 +20,5 @@ export  enum enumRowType {
   noChild = 'noChild',
   sibling = 'sibling',
 }
+
+export type typeParentId = number | null;

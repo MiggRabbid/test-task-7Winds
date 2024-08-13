@@ -13,10 +13,11 @@
 
 .row_block {
   @extend .row;
-  @apply bg-green-950;
+  @apply bg-siteTheme-ascent;
 
   .row__td {
     @extend %table-body-cell;
+    @apply text-siteTheme-second;
   }
 
   .row__td:nth-child(2) {

@@ -21,6 +21,19 @@ module.exports = {
       borderWidth: {
         siteWidth: '1px',
       },
+      keyframes: {
+        fadeStart: {
+          '0%, 100%': { opacity: '0' },
+          '50%': { opacity: '1' },
+        },
+        fadeStart: {
+          '0%, 100%': { opacity: '0' },
+          '50%': { opacity: '1' },
+        },
+      },
+      animation: {
+        fadeStart: 'fade 6s ease-in-out infinite',
+      },
     },
   },
   plugins: [],

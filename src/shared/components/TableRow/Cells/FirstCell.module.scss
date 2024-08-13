@@ -16,8 +16,14 @@
       @apply size-6;
     }
 
+    /*
+    * Данная аницация не совсем корректна, т.к. 
+    * можно табами допрыгать и удалить.
+    * Но пока это костыль, быстрый и красивый.
+    */
     .btn__delete {
-      @apply size-4 opacity-0 transition-all duration-200;
+      @apply size-4 opacity-0
+      transition-all duration-300;
     }
   }
 
@@ -25,8 +31,17 @@
     @apply bg-siteTheme-ascent;
 
     .btn__delete {
-      @apply size-4 block opacity-100;
+      @apply opacity-100;
     }
+  }
+
+  .td__btns_isNewRow {
+    @extend .td__btns;
+    @apply w-7;
+  }
+
+  .td__btns_isNewRow:hover {
+    @apply bg-transparent;
   }
 
   .btns__path_parent {

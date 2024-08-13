@@ -28,7 +28,8 @@
   }
 
   .table__container {
-    @apply px-[10px]
+    @apply px-[10px] 
+    flex flex-col justify-start items-stretch;
   }
   .main__table {
     @apply w-full min-h-full h-max;
@@ -48,6 +49,28 @@
       .table__th:nth-child(2) {
         @extend %table-cell-wide;
       }
+    }
+  }
+  
+  .table__isLoading {
+    @apply mx-auto w-full my-5
+    flex flex-row justify-center items-center gap-1;
+
+    p {
+      @apply m-0 p-0 text-siteTheme-second leading-5;
+    };
+
+    .isLoading__ring {
+      @apply size-5 fill-siteTheme-second animate-spin;
+    }
+  }
+
+  .table__isError {
+    @extend .table__isLoading;
+
+    .isError__ring {
+      @apply size-5 fill-siteTheme-second;
+
     }
   }
 }

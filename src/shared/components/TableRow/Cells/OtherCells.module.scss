@@ -1,0 +1,45 @@
+@import '../../../../styles/variables.scss';
+@import '../../../../styles/extends.scss';
+
+.row__td {
+  @extend %table-body-cell;
+}
+
+.row__td:nth-child(2) {
+  @extend %table-cell-wide;
+}
+
+.row__td_block {
+  @extend %table-body-cell;
+  @apply text-siteTheme-second;
+
+  p {
+    @apply text-siteTheme-second;
+  }
+}
+
+.row__td_block:nth-child(2) {
+  @extend %table-body-cell;
+  @extend %table-cell-wide;
+}
+
+.td__input {
+  @apply h-9 w-full ps-[10px] rounded-md caret-siteTheme-second
+  text-sm text-siteTheme-second
+  bg-siteTheme-dark border-siteWidth;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+  }
+
+  & {
+    -moz-appearance: textfield;
+  }
+
+  &:disabled {
+    @extend .td__input;
+    @apply text-opacity-50;
+  }
+}

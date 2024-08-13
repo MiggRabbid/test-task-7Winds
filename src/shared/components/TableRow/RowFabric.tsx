@@ -1,36 +1,48 @@
 import React from 'react';
-import { iEntity, typeColumnMapType } from '../../../models/interface';
-import { enumRowType, typeTableKey } from '../../../models/types';
+import { useSelector } from 'react-redux';
+
+import { columnMap, getParentType, isDataEmpty } from './RowFabric.services';
+import { getTableData } from '../../../selectors/rowSelector';
+
 import RowHeader from './Rows/RowHeader/RowHeader';
 import RowBody from './Rows/RowBody/RowBody';
 
+import { iResponse, iTreeResponse } from '../../../models/interface';
+import { enumRowType, typeParentId } from '../../../models/types';
+
 interface iRowFabricProps {
   rowType: enumRowType.td | enumRowType.th;
-  rowData?: iEntity;
+  parentId: typeParentId;
 }
 
-const columnMap: typeColumnMapType = new Map([
-  ['child', 'Уровень'],
-  ['rowName', 'Наименование работ'],
-  ['salary', 'Основная з/п'],
-  ['equipmentCosts', 'Оборудование'],
-  ['overheads', 'Накладные расходы'],
-  ['estimatedProfit', 'Сметная прибыль'],
-]);
-
 const RowFabric: React.FC<iRowFabricProps> = (props) => {
-  const { rowType, rowData } = props;
-
-  if (!rowData) return null;
-  if (rowType === enumRowType.td && !rowData) return null;
-
+  const { rowType, parentId } = props;
+  const rowData: iResponse = useSelector(getTableData);
+  
   if (rowType === enumRowType.th) {
     return <RowHeader columnMap={columnMap} />;
   }
 
-  const parentRowType = rowData.child[0] === null ? enumRowType.noChild : enumRowType.parent
+  if (isDataEmpty(rowData)) {
+    return null;
+  }
+
   return (
-      <RowBody columnMap={columnMap} tableData={rowData} rowType={parentRowType} lvl='1'/>
+    <>
+      {rowData?.map((item: iTreeResponse) => {
+        const parentRowType = getParentType(item);
+        return (
+          <RowBody
+            columnMap={columnMap}
+            tableData={item}
+            rowType={parentRowType}
+            lvl="0"
+            key={item.id}
+            parentId={parentId}
+          />
+        );
+      })}
+    </>
   );
 };
 
