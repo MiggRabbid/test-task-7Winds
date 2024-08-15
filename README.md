@@ -20,7 +20,6 @@
 
 **Источники данных**
 
-- [ссылка на задание](https://rikzun.notion.site/Code-style-and-Best-Practices-9d5beaa4adf14743bf34ea6bb0c213eb)
 - [ссылка на макет](https://www.figma.com/file/yyls8AT1soKQ3Qpfl2Y3Nz?type=design%27&node-id=0:1)
 - [ссылка на API Docs](http://185.244.172.108:8081/swagger-ui/index.html?url=/openapi.json#/)
 
