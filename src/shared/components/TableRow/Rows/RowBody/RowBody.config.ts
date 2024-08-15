@@ -1,6 +1,9 @@
 import * as Yup from 'yup';
 
-import { iOutlayRowUpdateRequest, iTreeResponse } from '../../../../../models/interface';
+import {
+  iOutlayRowUpdateRequest,
+  iTreeResponse,
+} from '../../../../../models/interface';
 
 export function getInitialValues(data: iTreeResponse): iOutlayRowUpdateRequest {
   const { child, id, total, ...rest } = data;

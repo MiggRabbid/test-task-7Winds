@@ -1,4 +1,8 @@
-import { iEntity, iOutlayRowUpdateRequest } from '../../../../../models/interface';
+import {
+  iEntity,
+  iOutlayRowUpdateRequest,
+  iTreeResponse,
+} from '../../../../../models/interface';
 import { enumRowType } from '../../../../../models/types';
 
 export function getRowType(
@@ -30,8 +34,33 @@ export function getNewRow(): iOutlayRowUpdateRequest {
     materials: 0,
     mimExploitation: 0,
     overheads: 0,
-    rowName: 'newRow',
+    rowName: '',
     salary: 0,
     supportCosts: 0,
   };
+}
+
+function countNestedDescendants(nestedChild: iTreeResponse): number {
+  if (nestedChild.child.length === 0) return 0;
+
+  return nestedChild.child.reduce((acc, child) => {
+    return acc + 1 + countNestedDescendants(child);
+  }, 0);
+}
+
+export function countDescendants(currChild: iTreeResponse[]): number {
+  if (!currChild || currChild.length === 0) {
+    return 0;
+  }
+
+  const firstLevelChildren = currChild;
+
+  let count = 0;
+
+  for (let i = 0; i < firstLevelChildren.length - 1; i++) {
+    count += 1 + countNestedDescendants(firstLevelChildren[i]);
+  }
+
+  count += firstLevelChildren.length - 1;
+  return count;
 }

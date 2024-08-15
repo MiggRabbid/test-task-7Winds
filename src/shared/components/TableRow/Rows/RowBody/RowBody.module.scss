@@ -13,7 +13,6 @@
 
 .row_block {
   @extend .row;
-  @apply bg-siteTheme-ascent;
 
   .row__td {
     @extend %table-body-cell;

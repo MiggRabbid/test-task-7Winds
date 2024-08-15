@@ -4,9 +4,9 @@ import ErrorOutlineIcon from '@mui/icons-material/ErrorOutline';
 
 import styles from './MainPage.module.scss';
 
-import { useGetAllRowQuery } from '../../app/store/api/entity.api.ts';
-import asideData from '../../data/asideMenuData.ts';
 import useActions from '../../hooks/useActions.ts';
+import { useGetAllRowQuery } from '../../app/store/api/entity.api.ts';
+import asideData from '../../shared/components/Aside/Aside.services.ts';
 
 import Header from '../../widgets/Header/Header.tsx';
 import Aside from '../../shared/components/Aside/Aside.tsx';
@@ -25,7 +25,6 @@ const MainPage = () => {
   } = useGetAllRowQuery();
 
   useEffect(() => {
-    console.log('tableData is changed');
     if (!!tableData) {
       const sortedTableData = getSortedTableData(tableData);
       setTableData(sortedTableData);

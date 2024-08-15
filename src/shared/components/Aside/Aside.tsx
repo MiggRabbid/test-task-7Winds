@@ -6,8 +6,9 @@ import iconArrow from '../../../assets/icons/icon-arrow.png';
 import iconItem from '../../../assets/icons/icon-item.png';
 
 const Aside: React.FC<{ menuItems: string[] }> = (props) => {
-  const [activeBtn] = useState('СМР');
   const { menuItems } = props;
+
+  const [activeBtn] = useState('СМР');
 
   return (
     <aside id="aside" className={styles.aside}>
@@ -17,6 +18,7 @@ const Aside: React.FC<{ menuItems: string[] }> = (props) => {
             <p className={styles.text__main}>Название проекта</p>
             <p className={styles.text__second}>Аббревиатура</p>
           </div>
+
           <button className={styles.title__btn}>
             <img src={iconArrow} alt="развернуть меню" />
           </button>

@@ -52,12 +52,12 @@ const RowBody: React.FC<iRowBodyProps> = (props) => {
     rowIsDisabled && !isNewRow && !isEdited ? styles.row_block : styles.row;
 
   useEffect(() => {
-    setCurrChild(tableData.child)
-  }, [tableData])
+    setCurrChild(tableData.child);
+  }, [tableData]);
 
   const handleClickAddRow = () => {
-    const newRow = getNewRow();
-    setCurrChild([...currChild, { ...newRow, child: [], id: 0, total: 0 }]);
+    const newRow = { ...getNewRow(), child: [], id: 0, total: 0 };
+    setCurrChild((prevState) => [...prevState, newRow]);
     openEdit();
   };
 
@@ -78,19 +78,14 @@ const RowBody: React.FC<iRowBodyProps> = (props) => {
       setSubmitting(true);
       try {
         if (isNewRow) {
-          const response = await createRow({
-            body: { ...values, parentId: parentId || null },
-          });
-          console.log('createRow - ', response.data);
+          const body = { ...values, parentId: parentId || null };
+          await createRow({ body });
         }
         if (!isNewRow) {
-          const response = await updateRow({
-            body: { ...values, parentId: parentId || null },
-            params: { rid: tableData.id },
-          });
-          console.log('updateRow - ', response.data);
+          const body = { ...values, parentId: parentId || null };
+          const params = { rid: tableData.id };
+          await updateRow({ body, params });
         }
-
       } catch (e) {
         console.error(e);
       } finally {
@@ -106,20 +101,21 @@ const RowBody: React.FC<iRowBodyProps> = (props) => {
     <>
       <tr className={rowClass} key={lvl} id={`row-${lvl}`}>
         {Array.from(columnMap.keys()).map((item: typeColumnMapKey) => {
+          const uniqKey = `${tableData.id}-${item}`;
+
           if (item === 'child') {
             return (
               <FirstCell
-              key={`${item}-${tableData.id}`}
+                key={uniqKey}
                 lvl={lvl}
-                id={`${item}-${tableData.id}`}
+                id={uniqKey}
                 item={item}
                 rowType={rowType}
                 isNewRow={isNewRow}
-                rowIsDisabled={rowIsDisabled && !isEdited}
+                rowIsDisabled={rowIsDisabled}
                 onClickAddRow={handleClickAddRow}
-                onClickDelRow={() => {
-                  console.log('deleteRow - ', tableData.id, tableData.rowName)
-                  deleteRow({ params: { rid: tableData.id } })}
+                onClickDelRow={() =>
+                  deleteRow({ params: { rid: tableData.id } })
                 }
               />
             );
@@ -127,12 +123,12 @@ const RowBody: React.FC<iRowBodyProps> = (props) => {
 
           return (
             <OtherCells
-              key={`${item}-${tableData.id}`}
-              id={`${item}-${tableData.id}`}
+              key={uniqKey}
+              id={uniqKey}
               controlId={item}
               inputType={item === 'rowName' ? 'text' : 'number'}
               value={formik.values[item]}
-              isDisabled={rowIsDisabled && !isEdited}
+              isDisabled={rowIsDisabled}
               isEdited={isEdited}
               isNewRow={isNewRow}
               onEditClick={handleClickIsEdited}
@@ -154,11 +150,11 @@ const RowBody: React.FC<iRowBodyProps> = (props) => {
 
           return (
             <RowBody
+              key={nestedData.id}
+              lvl={currLvl}
               columnMap={columnMap}
               tableData={nestedData}
-              key={currLvl}
               rowType={rowType}
-              lvl={currLvl}
               parentId={tableData.id}
             />
           );

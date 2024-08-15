@@ -10,7 +10,6 @@
   @apply w-full h-max 
   flex flex-row grow border-t-siteWidth;
   min-height: $height-body;
-
 }
 
 .main {
@@ -51,14 +50,14 @@
       }
     }
   }
-  
+
   .table__isLoading {
     @apply mx-auto w-full my-5
     flex flex-row justify-center items-center gap-1;
 
     p {
       @apply m-0 p-0 text-siteTheme-second leading-5;
-    };
+    }
 
     .isLoading__ring {
       @apply size-5 fill-siteTheme-second animate-spin;
@@ -70,7 +69,6 @@
 
     .isError__ring {
       @apply size-5 fill-siteTheme-second;
-
     }
   }
 }

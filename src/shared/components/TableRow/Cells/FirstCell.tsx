@@ -32,11 +32,11 @@ const FirstCell: React.FC<iRowBodyProps> = (props) => {
     onClickAddRow,
     onClickDelRow,
   } = props;
-  
 
   const nestedLvl = lvl.split('-').length;
   const leftPosition = BASE_LEFT_POSITION * nestedLvl;
-  const btnsClass = !isNewRow ? styles.td__btns : styles.td__btns_isNewRow;
+  const btnsClass =
+    !rowIsDisabled && !isNewRow ? styles.td__btns : styles.td__btns_isNewRow;
 
   return (
     <td className={styles.row__td_first} key={`${lvl}-${item}`} id={id}>
@@ -44,17 +44,20 @@ const FirstCell: React.FC<iRowBodyProps> = (props) => {
         {rowType === enumRowType.parent && (
           <div className={styles.btns__path_parent} />
         )}
+
         {rowType === enumRowType.sibling && (
           <div className={styles.btns__path_sibling} />
         )}
-        <button onClick={onClickAddRow} disabled={rowIsDisabled}>
+
+        <button onClick={onClickAddRow} disabled={rowIsDisabled || isNewRow}>
           <img
             src={iconFile}
             alt="Создать вложение"
             className={styles.btn__create}
           />
         </button>
-        {!isNewRow && (
+
+        {!isNewRow && !rowIsDisabled && (
           <button disabled={rowIsDisabled} onClick={onClickDelRow}>
             <img src={iconTrash} alt="Удалить" className={styles.btn__delete} />
           </button>

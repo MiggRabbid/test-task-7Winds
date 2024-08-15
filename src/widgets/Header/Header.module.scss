@@ -16,11 +16,11 @@
         @apply size-6;
 
         .btn__menu {
-          @apply size-[16px];
+          @apply size-[24px] fill-siteTheme-second;
         }
 
         .btn__back {
-          @apply w-[18px] h-[15px];
+          @apply w-[18px] h-[15px] fill-siteTheme-second;
         }
       }
     }

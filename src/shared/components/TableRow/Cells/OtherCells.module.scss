@@ -11,7 +11,6 @@
 
 .row__td_block {
   @extend %table-body-cell;
-  @apply text-siteTheme-second;
 
   p {
     @apply text-siteTheme-second;

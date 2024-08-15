@@ -1,4 +1,10 @@
-import React, { ChangeEvent, KeyboardEvent, useCallback } from 'react';
+import React, {
+  ChangeEvent,
+  KeyboardEvent,
+  useCallback,
+  useEffect,
+  useRef,
+} from 'react';
 
 import styles from './OtherCells.module.scss';
 
@@ -29,8 +35,20 @@ const OtherCells: React.FC<iOtherCellsProps> = ({
   onSubmit,
   onCancel,
 }) => {
-  const tdClass = isDisabled ? styles.row__td_block : styles.row__td;
-  const inputBlocked = (!isEdited && !isNewRow) || (isDisabled && !isNewRow);
+  const nameInputRef = useRef<HTMLInputElement>(null);
+  const isNameInput = inputType === 'text';
+
+  useEffect(() => {
+    if (isNameInput && nameInputRef.current) {
+      nameInputRef.current.focus();
+    }
+  }, []);
+
+  const tdClass =
+    (isDisabled && !isEdited) || (isDisabled && !isNewRow)
+      ? styles.row__td_block
+      : styles.row__td;
+  const inputBlocked = !(isNewRow || isEdited);
 
   const handleKeyDown = useCallback(
     (e: KeyboardEvent<HTMLInputElement>) => {
@@ -45,6 +63,7 @@ const OtherCells: React.FC<iOtherCellsProps> = ({
 
   const handleOnChange = useCallback(
     (e: ChangeEvent<HTMLInputElement>) => {
+      console.log(e.target);
       onChange(e);
     },
     [onChange],
@@ -56,17 +75,26 @@ const OtherCells: React.FC<iOtherCellsProps> = ({
       onDoubleClick={!isDisabled ? onEditClick : undefined}
       id={id}
     >
-      {inputBlocked ? (
-        <p>{value}</p>
-      ) : (
+      {inputBlocked && (
+        <p>
+          {isNameInput
+            ? value
+            : Intl.NumberFormat('ru-RU').format(value as number)}
+        </p>
+      )}
+
+      {!inputBlocked && (
         <input
           type={inputType}
           value={value}
           onChange={handleOnChange}
-          disabled={isDisabled && !isNewRow}
+          disabled={isDisabled && !(isNewRow || isEdited)}
           className={styles.td__input}
           name={controlId}
           onKeyDown={handleKeyDown}
+          ref={isNameInput ? nameInputRef : null}
+          autoComplete="off"
+          id={`${isNewRow}`}
         />
       )}
     </td>
